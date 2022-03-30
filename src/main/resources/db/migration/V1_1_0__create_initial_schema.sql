@@ -19,7 +19,8 @@ course_id INT,
 student_id INT,
 PRIMARY KEY(id),
 FOREIGN KEY(course_id) REFERENCES course(course_id),
-FOREIGN KEY(student_id) REFERENCES student(student_id)
+FOREIGN KEY(student_id) REFERENCES student(student_id),
+UNIQUE(course_id, student_id)
 );
 
 CREATE TABLE IF NOT EXISTS location (
@@ -46,11 +47,6 @@ schedule_id INT,
 PRIMARY KEY(id),
 FOREIGN KEY(course_id) REFERENCES course(course_id),
 FOREIGN KEY(location_id) REFERENCES location(location_id),
-FOREIGN KEY(schedule_id) REFERENCES schedule(schedule_id)
-);
-
-CREATE TABLE IF NOT EXISTS test (
-test_id INT AUTO_INCREMENT,
-test_data TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-PRIMARY KEY(test_id)
+FOREIGN KEY(schedule_id) REFERENCES schedule(schedule_id),
+UNIQUE(course_id, location_id, schedule_id)
 );

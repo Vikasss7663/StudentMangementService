@@ -6,7 +6,7 @@ spring:
   profiles:
     active: local
   datasource:
-    url: 'jdbc:mysql://localhost:3307/student?allowPublicKeyRetrieval=true&useSSL=false'
+    url: 'jdbc:mysql://localhost:3307/school?allowPublicKeyRetrieval=true&useSSL=false'
     username: admin
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
