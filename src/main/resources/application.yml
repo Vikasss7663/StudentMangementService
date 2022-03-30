@@ -1,0 +1,18 @@
+server:
+  port: '8080'
+
+
+spring:
+  profiles:
+    active: local
+  datasource:
+    url: 'jdbc:mysql://localhost:3307/student?allowPublicKeyRetrieval=true&useSSL=false'
+    username: admin
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
