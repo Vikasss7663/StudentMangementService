@@ -33,21 +33,18 @@ public class CourseService {
         return course.map(this::getCourseDtoInstance).orElseGet(CourseDto::new);
     }
 
-    public ResponseEntity<String> addCourse(CourseDto courseDto) {
+    public CourseDto addCourse(CourseDto courseDto) {
         Course course = getCourseInstanceFromDto(courseDto);
-        courseRepository.save(course);
-        return new ResponseEntity<>("Course Added", HttpStatus.OK);
+        return getCourseDtoInstance(courseRepository.save(course));
     }
 
-    public ResponseEntity<String> updateCourse(CourseDto courseDto) {
+    public CourseDto updateCourse(CourseDto courseDto) {
         Course course = getCourseInstanceFromDto(courseDto);
-        courseRepository.save(course);
-        return new ResponseEntity<>("Course Updated", HttpStatus.OK);
+        return getCourseDtoInstance(courseRepository.save(course));
     }
 
-    public ResponseEntity<String> deleteCourse(int id) {
+    public void deleteCourse(int id) {
         courseRepository.deleteById(id);
-        return new ResponseEntity<>("Course Deleted", HttpStatus.OK);
     }
 
     private Course getCourseInstanceFromDto(CourseDto courseDto) {

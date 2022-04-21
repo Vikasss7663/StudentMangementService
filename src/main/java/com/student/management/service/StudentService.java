@@ -1,7 +1,9 @@
 package com.student.management.service;
 
 import com.student.management.dtos.StudentDto;
+import com.student.management.model.School;
 import com.student.management.model.Student;
+import com.student.management.repository.SchoolRepository;
 import com.student.management.repository.StudentRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -17,6 +19,7 @@ import java.util.Optional;
 public class StudentService {
     
     private final StudentRepository studentRepository;
+    private final SchoolRepository schoolRepository;
     private Logger logger = LoggerFactory.getLogger(StudentService.class);
 
 
@@ -45,12 +48,18 @@ public class StudentService {
 
     public StudentDto addStudent(StudentDto studentDto) {
         Student student = getStudentInstanceFromDto(studentDto);
+        School school = schoolRepository.getById(studentDto.getSchoolId());
+        student.setSchool(school);
+
         Student insertedStudent = studentRepository.save(student);
         return getStudentDtoInstance(insertedStudent);
     }
 
     public StudentDto updateStudent(StudentDto studentDto) {
         Student student = getStudentInstanceFromDto(studentDto);
+        School school = schoolRepository.getById(studentDto.getSchoolId());
+        student.setSchool(school);
+
         Student updatedStudent = studentRepository.save(student);
         return getStudentDtoInstance(updatedStudent);
     }
@@ -76,6 +85,8 @@ public class StudentService {
         studentDto.setStudentName(student.getStudentName());
         studentDto.setStudentSemester(student.getStudentSemester());
         studentDto.setStudentYear(student.getStudentYear());
+        studentDto.setSchoolId(student.getSchool().getSchoolId());
+        studentDto.setSchoolName(student.getSchool().getSchoolName());
         return studentDto;
     }
 

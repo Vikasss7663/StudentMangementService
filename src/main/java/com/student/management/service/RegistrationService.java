@@ -3,7 +3,9 @@ package com.student.management.service;
 import com.student.management.dtos.CourseDto;
 import com.student.management.dtos.RegistrationDto;
 import com.student.management.dtos.StudentDto;
+import com.student.management.dtos.TimeTableDto;
 import com.student.management.model.Registration;
+import com.student.management.model.TimeTable;
 import com.student.management.repository.CourseRepository;
 import com.student.management.repository.RegistrationRepository;
 import com.student.management.repository.StudentRepository;
@@ -34,7 +36,7 @@ public class RegistrationService {
         return tupleToStudentList(tuples);
     }
 
-    public void addStudent(RegistrationDto registrationDto) {
+    public RegistrationDto addStudent(RegistrationDto registrationDto) {
 
         Course course = courseRepository.findById(registrationDto.getCourseId()).get();
         Student student = studentRepository.findById(registrationDto.getStudentId()).get();
@@ -44,7 +46,7 @@ public class RegistrationService {
         registration.setCourse(course);
         registration.setStudent(student);
 
-        registrationRepository.save(registration);
+        return getRegistrationDtoInstance(registrationRepository.save(registration));
     }
 
     private List<CourseDto> tupleToCourseList(List<Tuple> tuples) {
@@ -78,6 +80,15 @@ public class RegistrationService {
         studentDto.setStudentSemester((int)tuple.get("student_semester"));
         studentDto.setStudentYear((int)tuple.get("student_year"));
         return studentDto;
+    }
+
+    private RegistrationDto getRegistrationDtoInstance(Registration registration) {
+
+        RegistrationDto registrationDto = new RegistrationDto();
+        registrationDto.setStudentId(registration.getStudent().getStudentId());
+        registrationDto.setCourseId(registration.getCourse().getCourseId());
+
+        return registrationDto;
     }
 
 }

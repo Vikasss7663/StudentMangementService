@@ -1,5 +1,7 @@
 package com.student.management.service;
 
+import com.student.management.dtos.SchoolDto;
+import com.student.management.model.School;
 import com.student.management.model.School;
 import com.student.management.repository.SchoolRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,21 +19,37 @@ public class SchoolService {
         return schoolRepository.findAll();
     }
 
-    public School getSchool(int id) {
-        return schoolRepository.findById(id).get();
+    public SchoolDto getSchool(int id) {
+        return getSchoolDtoInstance(schoolRepository.findById(id).get());
     }
 
-    public void addSchool(School school) {
-        schoolRepository.save(school);
+    public SchoolDto addSchool(SchoolDto schoolDto) {
+        School school = getSchoolInstanceFromDto(schoolDto);
+        return getSchoolDtoInstance(schoolRepository.save(school));
     }
 
-    public void updateSchool(School school) {
-        schoolRepository.save(school);
+    public SchoolDto updateSchool(SchoolDto schoolDto) {
+        School school = getSchoolInstanceFromDto(schoolDto);
+        return getSchoolDtoInstance(schoolRepository.save(school));
     }
 
     public void deleteSchool(int id) {
         schoolRepository.deleteById(id);
     }
-    
+
+    private School getSchoolInstanceFromDto(SchoolDto schoolDto) {
+        School school = new School();
+        school.setSchoolId(schoolDto.getSchoolId());
+        school.setSchoolName(schoolDto.getSchoolName());
+        return school;
+    }
+
+    private SchoolDto getSchoolDtoInstance(School school) {
+        if(school == null) return new SchoolDto();
+        SchoolDto schoolDto = new SchoolDto();
+        schoolDto.setSchoolId(school.getSchoolId());
+        schoolDto.setSchoolName(school.getSchoolName());
+        return schoolDto;
+    }
 
 }

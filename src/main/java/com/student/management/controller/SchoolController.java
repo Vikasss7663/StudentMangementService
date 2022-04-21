@@ -1,5 +1,6 @@
 package com.student.management.controller;
 
+import com.student.management.dtos.SchoolDto;
 import com.student.management.model.School;
 import com.student.management.service.SchoolService;
 import lombok.RequiredArgsConstructor;
@@ -24,18 +25,18 @@ public class SchoolController {
     }
 
     @GetMapping(value = "{id}")
-    public School getSchool(@PathVariable int id) {
+    public SchoolDto getSchool(@PathVariable int id) {
         return schoolService.getSchool(id);
     }
 
     @PostMapping
-    public void addSchool(@RequestBody School school) {
-        schoolService.addSchool(school);
+    public SchoolDto addSchool(@RequestBody SchoolDto schoolDto) {
+        return schoolService.addSchool(schoolDto);
     }
 
     @PutMapping
-    public void updateSchool(@RequestBody School school) {
-        schoolService.addSchool(school);
+    public SchoolDto updateSchool(@RequestBody SchoolDto schoolDto) {
+        return schoolService.addSchool(schoolDto);
     }
 
     @DeleteMapping(value = "{id}")

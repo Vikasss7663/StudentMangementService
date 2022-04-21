@@ -28,14 +28,14 @@ public class LocationController {
 
 	// POST ( Add Location )
 	@PostMapping
-	public void addCourse(@RequestBody LocationDto locationDto) {
-		service.addLocation(locationDto);
+	public LocationDto addCourse(@RequestBody LocationDto locationDto) {
+		return service.addLocation(locationDto);
 	}
 
 	// PUT ( Update Location )
 	@PutMapping
-	public void updateLocation(@RequestBody LocationDto locationDto) {
-		service.updateLocation(locationDto);
+	public LocationDto updateLocation(@RequestBody LocationDto locationDto) {
+		return service.updateLocation(locationDto);
 	}
 	
 	// DELETE ( Delete Location )

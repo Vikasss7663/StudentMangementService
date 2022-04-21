@@ -46,8 +46,8 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(
                         "/authenticate",
                         "/error",
-                        "/ui/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/student/**").permitAll()
+                        "/ui/**",
+                        "/student/**").permitAll()
                 // Our private endpoints
                 .anyRequest().authenticated()
                 .and()

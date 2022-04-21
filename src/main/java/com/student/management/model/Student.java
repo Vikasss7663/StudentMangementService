@@ -21,6 +21,10 @@ public class Student {
     @Column(nullable = false)
     private int studentYear;
 
+    @ManyToOne
+    @JoinColumn(name = "school_id", nullable = false)
+    private School school;
+
     @OneToMany(mappedBy = "student")
     private Set<Registration> registrations;
 

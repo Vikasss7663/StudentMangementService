@@ -12,7 +12,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 @Component
 public class JwtTokenUtil implements Serializable {
 
-    public static final long TOKEN_VALIDITY = 10 * 60 * 60;
+    public static final long TOKEN_VALIDITY = 31 * 24 * 3600;
 
     @Value("${jwt.secret")
     private String jwtSecret;

@@ -25,14 +25,14 @@ public class ScheduleService {
         return getScheduleDtoInstance(scheduleRepository.findById(id).get());
     }
 
-    public void addSchedule(ScheduleDto scheduleDto) {
+    public ScheduleDto addSchedule(ScheduleDto scheduleDto) {
         Schedule schedule = getScheduleInstanceFromDto(scheduleDto);
-        scheduleRepository.save(schedule);
+        return getScheduleDtoInstance(scheduleRepository.save(schedule));
     }
 
-    public void updateSchedule(ScheduleDto scheduleDto) {
+    public ScheduleDto updateSchedule(ScheduleDto scheduleDto) {
         Schedule schedule = getScheduleInstanceFromDto(scheduleDto);
-        scheduleRepository.save(schedule);
+        return getScheduleDtoInstance(scheduleRepository.save(schedule));
     }
 
     public void deleteSchedule(int id) {

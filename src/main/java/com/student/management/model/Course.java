@@ -24,7 +24,7 @@ public class Course {
     private Set<Registration> registrations;
 
     @OneToMany(mappedBy = "course")
-    private Set<TimeTable> managements;
+    private Set<TimeTable> timeTables;
 
     public Course() { }
 

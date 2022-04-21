@@ -28,14 +28,14 @@ public class ScheduleController {
 
 	// POST ( Add Schedule )
 	@PostMapping
-	public void addCourse(@NonNull @RequestBody ScheduleDto scheduleDto) {
-		service.addSchedule(scheduleDto);
+	public ScheduleDto addCourse(@NonNull @RequestBody ScheduleDto scheduleDto) {
+		return service.addSchedule(scheduleDto);
 	}
 	
 	// PUT ( Update Schedule )
 	@PutMapping
-	public void updateSchedule(@RequestBody ScheduleDto scheduleDto) {
-		service.updateSchedule(scheduleDto);
+	public ScheduleDto updateSchedule(@RequestBody ScheduleDto scheduleDto) {
+		return service.updateSchedule(scheduleDto);
 	}
 	
 	// DELETE ( Delete Schedule )

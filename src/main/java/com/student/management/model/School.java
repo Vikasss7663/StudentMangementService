@@ -2,10 +2,8 @@ package com.student.management.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -15,8 +13,8 @@ public class School {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int schoolId;
     private String schoolName;
-    private String emailTo;
-    private String emailBcc;
-    private String emailCc;
+
+    @OneToMany(mappedBy = "school")
+    private Set<Student> students;
 
 }

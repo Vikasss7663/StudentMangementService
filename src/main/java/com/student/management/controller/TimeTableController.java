@@ -2,6 +2,7 @@ package com.student.management.controller;
 
 import com.student.management.dtos.CourseScheduleLocationDto;
 import com.student.management.dtos.TimeTableDto;
+import com.student.management.model.TimeTable;
 import com.student.management.service.TimeTableService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -41,14 +42,14 @@ public class TimeTableController {
 
     // POST ( Add Time Table )
     @PostMapping
-    public void addTimeTable(@NonNull @RequestBody TimeTableDto timeTableDto) {
-        service.addTimeTable(timeTableDto);
+    public TimeTableDto addTimeTable(@NonNull @RequestBody TimeTableDto timeTableDto) {
+        return service.addTimeTable(timeTableDto);
     }
 
     // PUT ( Update Time Table )
     @PutMapping
-    public void updateTimeTable(@NonNull @RequestBody TimeTableDto timeTableDto) {
-        service.addTimeTable(timeTableDto);
+    public TimeTableDto updateTimeTable(@NonNull @RequestBody TimeTableDto timeTableDto) {
+        return service.addTimeTable(timeTableDto);
     }
 
     // DELETE ( Delete Time Table )

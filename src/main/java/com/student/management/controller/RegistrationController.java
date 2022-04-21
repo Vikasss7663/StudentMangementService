@@ -32,8 +32,8 @@ public class RegistrationController {
 
     // POST ( Add Student )
     @PostMapping(value = "student")
-    public void addStudent(@NonNull @RequestBody RegistrationDto registrationDto) {
-        service.addStudent(registrationDto);
+    public RegistrationDto addStudent(@NonNull @RequestBody RegistrationDto registrationDto) {
+        return service.addStudent(registrationDto);
     }
 
 }

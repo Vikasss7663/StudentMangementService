@@ -26,21 +26,6 @@ public class TimeTableService {
     private final LocationRepository locationRepository;
     private final TimeTableRepository timeTableRepository;
 
-    public void addTimeTable(TimeTableDto timeTableDto) {
-
-        Course course = courseRepository.findById(timeTableDto.getCourseId()).get();
-        Schedule schedule = scheduleRepository.findById(timeTableDto.getScheduleId()).get();
-        Location location = locationRepository.findById(timeTableDto.getLocationId()).get();
-
-        TimeTable timeTable = new TimeTable();
-        timeTable.setId(timeTableDto.getId());
-        timeTable.setCourse(course);
-        timeTable.setSchedule(schedule);
-        timeTable.setLocation(location);
-
-        timeTableRepository.save(timeTable);
-    }
-
     public List<CourseScheduleLocationDto> getTimeTables() {
         List<Tuple> tuples =  timeTableRepository.findCourseScheduleLocation();
         return tupleToCourseScheduleLocationList(tuples);
@@ -59,6 +44,25 @@ public class TimeTableService {
     public List<CourseScheduleLocationDto> getTimeTableByStudentId(String studentId) {
         List<Tuple> tuples =  timeTableRepository.findCourseScheduleLocationByStudentId(studentId);
         return tupleToCourseScheduleLocationList(tuples);
+    }
+
+    public TimeTableDto addTimeTable(TimeTableDto timeTableDto) {
+
+        Course course = courseRepository.findById(timeTableDto.getCourseId()).get();
+        Schedule schedule = scheduleRepository.findById(timeTableDto.getScheduleId()).get();
+        Location location = locationRepository.findById(timeTableDto.getLocationId()).get();
+
+        TimeTable timeTable = new TimeTable();
+        timeTable.setId(timeTableDto.getId());
+        timeTable.setCourse(course);
+        timeTable.setSchedule(schedule);
+        timeTable.setLocation(location);
+
+        return getTimeTableDtoInstance(timeTableRepository.save(timeTable));
+    }
+
+    public void deleteTimeTable(int timetableId) {
+        timeTableRepository.deleteById(timetableId);
     }
 
     private List<CourseScheduleLocationDto> tupleToCourseScheduleLocationList(List<Tuple> tuples) {
@@ -85,9 +89,15 @@ public class TimeTableService {
 
     }
 
-    public void deleteTimeTable(int timetableId) {
-        timeTableRepository.deleteById(timetableId);
+    private TimeTableDto getTimeTableDtoInstance(TimeTable timeTable) {
 
+        TimeTableDto timeTableDto = new TimeTableDto();
+        timeTableDto.setCourseId(timeTable.getCourse().getCourseId());
+        timeTableDto.setLocationId(timeTable.getLocation().getLocationId());
+        timeTableDto.setScheduleId(timeTable.getSchedule().getScheduleId());
+
+        return timeTableDto;
     }
+
 
 }

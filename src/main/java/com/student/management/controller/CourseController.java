@@ -36,20 +36,20 @@ public class CourseController {
 
 	// POST ( Add Course )
 	@PostMapping
-	public ResponseEntity<String> addCourse(@NonNull @RequestBody CourseDto courseDto) {
+	public CourseDto addCourse(@NonNull @RequestBody CourseDto courseDto) {
 		return service.addCourse(courseDto);
 	}
 
 	// PUT ( Update Course )
 	@PutMapping
-	public ResponseEntity<String> updateCourse(@NonNull @RequestBody CourseDto courseDto) {
+	public CourseDto updateCourse(@NonNull @RequestBody CourseDto courseDto) {
 		return service.updateCourse(courseDto);
 	}
 	
 	// DELETE ( Delete Course )
 	@DeleteMapping(value = "{id}")
-	public ResponseEntity<String> deleteCourse(@PathVariable int id) {
-		return service.deleteCourse(id);
+	public void deleteCourse(@PathVariable int id) {
+		service.deleteCourse(id);
 	}
 
 }

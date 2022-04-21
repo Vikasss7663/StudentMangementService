@@ -25,14 +25,14 @@ public class LocationService {
         return getLocationDtoInstance(locationRepository.findById(id).get());
     }
 
-    public void addLocation(LocationDto locationDto) {
+    public LocationDto addLocation(LocationDto locationDto) {
         Location location = getLocationInstanceFromDto(locationDto);
-        locationRepository.save(location);
+        return getLocationDtoInstance(locationRepository.save(location));
     }
 
-    public void updateLocation(LocationDto locationDto) {
+    public LocationDto updateLocation(LocationDto locationDto) {
         Location location = getLocationInstanceFromDto(locationDto);
-        locationRepository.save(location);
+        return getLocationDtoInstance(locationRepository.save(location));
     }
 
     public void deleteLocation(int id) {
